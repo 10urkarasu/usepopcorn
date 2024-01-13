@@ -12,12 +12,12 @@
 
 * {
   margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 55%;
+  margin: 0px 20vw 0px 20vw;
 }
 
 body {
@@ -32,13 +32,35 @@ body {
 /* ******* */
 
 .nav-bar {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; /* Değişiklik: space-around yerine space-between */
   align-items: center;
-  height: 7.2rem;
-  padding: 0 3.2rem;
   background-color: var(--color-primary);
   border-radius: 0.9rem;
+  padding: 2.4rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.search {
+  flex-grow: 0.5; /* Değişiklik: Arama kutusu tüm boş alanı kaplasın */
+  margin: 0 1rem; /* Boşluk eklendi */
+  border: none;
+  padding: 1.1rem 1.6rem;
+  font-size: 1.8rem;
+  border-radius: 0.7rem;
+  transition: all 0.3s;
+  color: var(--color-text);
+  background-color: var(--color-primary-light);
+}
+
+.num-results {
+  font-size: 1.8rem;
 }
 
 .main {
@@ -46,16 +68,16 @@ body {
   height: calc(100vh - 7.2rem - 3 * 2.4rem);
   display: flex;
   gap: 2.4rem;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .box {
-  width: 42rem;
-  max-width: 42rem;
   background-color: var(--color-background-500);
   border-radius: 0.9rem;
-  overflow: hidden;
+  overflow-y: scroll;
+  overflow-x: hidden;
   position: relative;
+  width: 50%;
 }
 
 .loader {
@@ -74,12 +96,6 @@ body {
 
 /* ******* */
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-}
-
 .logo span {
   font-size: 3.2rem;
 }
@@ -90,20 +106,6 @@ body {
   color: #fff;
 }
 
-.search {
-  justify-self: center;
-  border: none;
-  padding: 1.1rem 1.6rem;
-  font-size: 1.8rem;
-  border-radius: 0.7rem;
-  width: 40rem;
-  transition: all 0.3s;
-  color: var(--color-text);
-
-  /* background-color: var(--color-background-900); */
-  background-color: var(--color-primary-light);
-}
-
 .search::placeholder {
   color: var(--color-text-dark);
 }
@@ -112,11 +114,6 @@ body {
   outline: none;
   box-shadow: 0 2.4rem 2.4rem rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
-}
-
-.num-results {
-  justify-self: end;
-  font-size: 1.8rem;
 }
 
 .btn-toggle {
@@ -346,3 +343,67 @@ SPACING SYSTEM (px)
 FONT SIZE SYSTEM (px)
 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 /52 / 62 / 74 / 86 / 98
 */
+
+.box::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  background-color: var(--color-background-100);
+}
+
+.box::-webkit-scrollbar {
+  width: 10px;
+  background-color: var(--color-background-100);
+}
+
+.box::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: var(--color-text-dark);
+}
+
+@media only screen and (max-width: 1080px) {
+  html {
+    font-size: 55%;
+    margin: 0px 10vw 0px 10vw;
+  }
+}
+
+/* Ekran genişliği 900 piksel veya daha küçük olduğunda */
+@media only screen and (max-width: 720px) {
+  body {
+    padding: 1.2rem;
+  }
+  html {
+    font-size: 50%;
+    margin: 5vw;
+  }
+  .nav-bar {
+    flex-direction: column; /* Dikey düzen */
+    align-items: center; /* Elemanları yatayda genişlet */
+    padding: 10px;
+    width: 100%;
+  }
+
+  .logo {
+    margin-bottom: 1rem; /* Logo ve arama kutusu arasında boşluk */
+  }
+
+  .search {
+    width: 100%; /* Tam genişlik */
+    margin: 0;
+  }
+
+  .num-results {
+    margin-top: 1rem; /* Arama kutusu ve sonuç sayısı arasında boşluk */
+  }
+  .main {
+    flex-direction: column;
+    justify-content: flex-start;
+    height: auto;
+  }
+  .box {
+    max-width: none;
+    width: 100%;
+    height: 650px;
+  }
+}
