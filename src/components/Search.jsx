@@ -12,7 +12,7 @@ export default function Search({ query, setQuery }) {
           setQuery("");
         }
       }
-      document.addEventListener("keydown", callback);
+      inputElement.current.focus();
       return () => document.addEventListener("keydown", callback);
     },
     [setQuery]
